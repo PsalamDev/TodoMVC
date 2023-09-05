@@ -1,0 +1,79 @@
+﻿@model List<ToDo.MVC.Models.Todo>
+@{
+	ViewData["Title"] = "Todo";
+
+}
+<section>
+	<div class="container p-3">
+		<div class="row pt-4">
+			<div class="col-6">
+				<h2 class="text-primary">Todo</h2>
+			</div>
+			<div class="col-6 text-end">
+				<a asp-controller="Todo" asp-action="Create" class="btn btn-primary">
+					<i class="bi bi-person-plus-fill"></i> Create 
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Total user (@Model.Count)</h3>
+
+					</div>
+					<div class="card-body">
+						<table id="example1" class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>TaskName</th>
+									<th>IsComplete</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+
+								@foreach (var item in Model)
+								{
+									<tr>
+										<td>@item.Id</td>
+										<td>@item.TaskName</td>
+										<td>@item.IsComplete</td>
+										
+										<td>
+											<a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+										</td>
+										<td>
+											<a asp-controller="Todo" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-success">Delete</a>
+										</td>
+										<td>
+											@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+											
+											@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+										</td>
+									</tr>
+								}
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Id</th>
+									<th>TaskName</th>
+									<th>IsComplete</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+</section>
